@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0B1F3A">
+<title>FinConseils — Trouvez votre conseiller financier</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-mid: #122845;
+    --navy-light: #1A3558;
+    --gold: #C9A84C;
+    --gold-light: #E2C472;
+    --cream: #F7F4EE;
+    --cream-dark: #EDE9DF;
+    --text-dark: #0B1F3A;
+    --text-mid: #4A5568;
+    --text-light: #8A9BB0;
+    --white: #FFFFFF;
+    --success: #2D8653;
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family:'DM Sans',sans-serif;
+    background:var(--cream);
+    color:var(--text-dark);
+    min-height:100vh;
+    padding-bottom:calc(64px + var(--safe-bottom));
+  }
+
+  /* ---- TOP NAV ---- */
+  nav.top-nav {
+    background:var(--navy);
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:calc(56px + var(--safe-top));
+    padding-top:var(--safe-top);
+    position:sticky; top:0; z-index:100;
+    border-bottom:1px solid rgba(201,168,76,0.2);
+  }
+  .logo { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--white); }
+  .logo span { color:var(--gold); }
+
+  .nav-links-desktop { display:none; gap:28px; list-style:none; }
+  .nav-links-desktop a { color:rgba(255,255,255,0.7); text-decoration:none; font-size:0.88rem; font-weight:500; transition:color 0.2s; }
+  .nav-links-desktop a:hover { color:var(--gold); }
+  .nav-cta { background:var(--gold); color:var(--navy)!important; padding:7px 18px; border-radius:4px; font-weight:600!important; }
+
+  .hamburger {
+    display:flex; flex-direction:column; gap:5px;
+    background:none; border:none; cursor:pointer; padding:8px; border-radius:8px;
+  }
+  .hamburger span { display:block; width:22px; height:2px; background:var(--white); border-radius:2px; transition:all 0.25s; }
+  .hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
+  .mobile-drawer {
+    display:none; position:fixed;
+    top:calc(56px + var(--safe-top)); left:0; right:0;
+    background:var(--navy); z-index:99;
+    border-bottom:1px solid rgba(201,168,76,0.2);
+    padding:12px 16px; flex-direction:column; gap:2px;
+    box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  }
+  .mobile-drawer.open { display:flex; }
+  .mobile-drawer a { color:rgba(255,255,255,0.85); text-decoration:none; font-size:1rem; font-weight:500; padding:13px 12px; border-radius:8px; transition:background 0.15s; }
+  .mobile-drawer a:active { background:rgba(255,255,255,0.07); }
+  .mobile-drawer .d-cta { background:var(--gold); color:var(--navy)!important; font-weight:700; text-align:center; margin-top:6px; border-radius:10px; }
+
+  /* ---- HERO ---- */
+  .hero {
+    background:var(--navy);
+    padding:32px 20px 28px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-60px; right:-80px;
+    width:280px; height:280px; border-radius:50%;
+    background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .hero-content { position:relative; z-index:1; }
+
+  .hero-badge {
+    display:inline-flex; align-items:center; gap:7px;
+    background:rgba(201,168,76,0.12); border:1px solid rgba(201,168,76,0.25);
+    color:var(--gold); padding:5px 12px; border-radius:100px;
+    font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:16px;
+  }
+  .hero-badge::before { content:'●'; font-size:0.45rem; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--white); line-height:1.2; margin-bottom:10px; }
+  .hero h1 em { font-style:normal; color:var(--gold); }
+  .hero p { color:rgba(255,255,255,0.58); font-size:0.88rem; line-height:1.65; margin-bottom:22px; }
+
+  .hero-slogan {
+    display:flex; align-items:center; gap:14px;
+    margin-bottom:26px;
+  }
+  .slogan-line { flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(201,168,76,0.35)); }
+  .slogan-line:last-child { background:linear-gradient(90deg, rgba(201,168,76,0.35), transparent); }
+  .slogan-text {
+    font-family:'Playfair Display',serif;
+    font-size:0.88rem; color:rgba(255,255,255,0.55);
+    letter-spacing:0.01em; white-space:nowrap; font-style:italic;
+    flex-shrink:0;
+  }
+  .slogan-text em { font-style:normal; color:var(--gold); font-weight:600; }
+
+  /* Search — stacked on mobile */
+  .search-container {
+    background:var(--white); border-radius:14px; padding:10px;
+    display:flex; flex-direction:column; gap:8px;
+    box-shadow:0 14px 40px rgba(0,0,0,0.28);
+  }
+  .search-field {
+    display:flex; align-items:center; gap:10px;
+    padding:12px 14px; background:var(--cream); border-radius:10px;
+  }
+  .search-field svg { color:var(--text-light); flex-shrink:0; }
+  .search-field select, .search-field input {
+    border:none; background:transparent;
+    font-family:'DM Sans',sans-serif; font-size:0.95rem; color:var(--text-dark);
+    width:100%; outline:none; min-height:24px;
+  }
+  .search-btn {
+    background:var(--gold); color:var(--navy); border:none;
+    padding:14px; border-radius:10px;
+    font-family:'DM Sans',sans-serif; font-size:0.95rem; font-weight:700;
+    cursor:pointer; width:100%; min-height:50px; transition:background 0.15s;
+  }
+  .search-btn:active { background:var(--gold-light); }
+
+  /* Stats bar */
+  .hero-stats {
+    display:flex; margin-top:22px;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:12px; overflow:hidden;
+  }
+  .stat { flex:1; display:flex; flex-direction:column; align-items:center; padding:12px 8px; border-right:1px solid rgba(255,255,255,0.08); }
+  .stat:last-child { border-right:none; }
+  .stat-num { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--white); font-weight:700; }
+  .stat-label { font-size:0.62rem; color:rgba(255,255,255,0.38); letter-spacing:0.04em; margin-top:2px; text-align:center; }
+
+  /* ---- FILTER BAR ---- */
+  .filter-section {
+    background:var(--white);
+    border-bottom:1px solid var(--cream-dark);
+    position:sticky; top:calc(56px + var(--safe-top)); z-index:90;
+    box-shadow:0 2px 10px rgba(11,31,58,0.06);
+  }
+  /* Category tab row */
+  .filter-cats {
+    display:flex; gap:0; overflow-x:auto; scrollbar-width:none;
+    border-bottom:1px solid var(--cream-dark); padding:0 12px;
+  }
+  .filter-cats::-webkit-scrollbar { display:none; }
+  .filter-cat-btn {
+    flex-shrink:0; display:flex; align-items:center; gap:5px;
+    padding:10px 13px; font-size:0.78rem; font-weight:600;
+    cursor:pointer; border:none; border-bottom:2.5px solid transparent;
+    background:transparent; color:var(--text-light);
+    font-family:'DM Sans',sans-serif; transition:all 0.15s; white-space:nowrap;
+    margin-bottom:-1px;
+  }
+  .filter-cat-btn.active { color:var(--navy); border-bottom-color:var(--gold); }
+  .filter-cat-btn:active { background:var(--cream); }
+
+  /* Chips + region row */
+  .filter-chips-row {
+    display:flex; align-items:center; gap:6px;
+    padding:9px 12px; overflow-x:auto; scrollbar-width:none;
+  }
+  .filter-chips-row::-webkit-scrollbar { display:none; }
+
+  .filter-chip {
+    flex-shrink:0; padding:7px 13px; border-radius:100px;
+    font-size:0.77rem; font-weight:500; cursor:pointer;
+    border:1.5px solid var(--cream-dark); background:transparent;
+    color:var(--text-mid); font-family:'DM Sans',sans-serif;
+    white-space:nowrap; min-height:36px; transition:all 0.12s;
+  }
+  .filter-chip:active { background:var(--cream-dark); }
+  .filter-chip.active { background:var(--navy); border-color:var(--navy); color:var(--white); }
+
+  .region-wrapper { position:relative; flex-shrink:0; }
+  .region-btn {
+    display:flex; align-items:center; gap:6px; padding:7px 13px;
+    border-radius:100px; font-size:0.77rem; font-weight:600;
+    cursor:pointer; border:1.5px solid var(--gold);
+    background:rgba(201,168,76,0.07); color:var(--navy);
+    font-family:'DM Sans',sans-serif; white-space:nowrap; min-height:36px;
+  }
+  .region-btn .arrow { font-size:0.58rem; transition:transform 0.2s; }
+
+  /* ---- REGION BOTTOM SHEET ---- */
+  .region-sheet { display:none; position:fixed; inset:0; z-index:300; }
+  .region-sheet.open { display:block; }
+  .region-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(2px); }
+  .region-panel {
+    position:absolute; bottom:0; left:0; right:0;
+    background:var(--white); border-radius:20px 20px 0 0;
+    padding:0 0 calc(16px + var(--safe-bottom));
+    max-height:85vh; overflow-y:auto;
+    animation:slideUp 0.3s cubic-bezier(.32,1,.5,1);
+  }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .sheet-handle { width:40px; height:4px; background:var(--cream-dark); border-radius:4px; margin:12px auto 14px; }
+  .sheet-title { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--navy); padding:0 20px 14px; border-bottom:1px solid var(--cream-dark); margin-bottom:12px; }
+  .region-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:0 14px; }
+  .region-opt {
+    display:flex; align-items:center; gap:6px;
+    padding:11px 10px; border-radius:10px;
+    font-size:0.82rem; color:var(--text-mid);
+    cursor:pointer; border:1.5px solid transparent;
+    font-family:'DM Sans',sans-serif; background:var(--cream);
+    text-align:left; width:100%; min-height:46px; font-weight:500;
+    transition:all 0.12s;
+  }
+  .region-opt:active { background:var(--cream-dark); }
+  .region-opt.active { background:var(--navy); color:var(--white); border-color:var(--navy); }
+  .region-count { margin-left:auto; font-size:0.7rem; opacity:0.42; font-weight:400; }
+  .region-opt.active .region-count { opacity:0.6; }
+  .region-all-row { padding:14px 14px 0; }
+  .region-all-btn {
+    width:100%; padding:13px; background:var(--cream);
+    border:1.5px solid var(--cream-dark); border-radius:12px;
+    font-family:'DM Sans',sans-serif; font-size:0.87rem; font-weight:600;
+    color:var(--navy); cursor:pointer; transition:all 0.15s;
+  }
+  .region-all-btn:active { background:var(--cream-dark); }
+  .region-group-label {
+    font-size:0.68rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--text-light); padding:12px 18px 6px;
+  }
+  .region-all-opt {
+    background:rgba(11,31,58,0.06); border:1.5px solid var(--cream-dark);
+    font-weight:600; color:var(--navy);
+  }
+  .region-all-opt.active { background:var(--navy); color:var(--white); border-color:var(--navy); }
+
+  /* ---- CARDS ---- */
+  .main { padding:22px 16px 16px; }
+  .featured-label {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.67rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:12px;
+  }
+  .featured-label::before { content:''; width:16px; height:1px; background:var(--gold); }
+  .section-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--navy); }
+  .section-count { font-size:0.78rem; color:var(--text-light); }
+
+  .cards-grid { display:flex; flex-direction:column; gap:14px; }
+
+  .conseiller-card {
+    background:var(--white); border-radius:16px; overflow:hidden;
+    border:1px solid var(--cream-dark); cursor:pointer;
+    transition:box-shadow 0.18s; display:flex; flex-direction:column;
+  }
+  .conseiller-card:active { box-shadow:0 6px 24px rgba(11,31,58,0.12); }
+
+  .card-top {
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    padding:18px 16px 14px; position:relative;
+    display:flex; align-items:center; gap:13px;
+  }
+  .card-badge-elite {
+    position:absolute; top:10px; right:12px;
+    background:var(--gold); color:var(--navy);
+    font-size:0.6rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    padding:3px 9px; border-radius:100px;
+  }
+  .card-avatar {
+    width:50px; height:50px; border-radius:50%;
+    border:2.5px solid rgba(201,168,76,0.4); flex-shrink:0;
+    background:var(--navy-light); display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--gold);
+  }
+  .card-info { flex:1; min-width:0; }
+  .card-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .card-title { font-size:0.7rem; color:rgba(255,255,255,0.48); margin-top:2px; }
+  .card-body { padding:13px 16px 16px; }
+  .card-specialties { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:9px; }
+  .specialty-tag { background:var(--cream); color:var(--navy); font-size:0.68rem; font-weight:600; padding:3px 9px; border-radius:100px; }
+  .card-bio { font-size:0.81rem; color:var(--text-mid); line-height:1.6; margin-bottom:12px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .card-meta { display:flex; align-items:center; justify-content:space-between; padding-top:11px; border-top:1px solid var(--cream-dark); }
+  .card-location { font-size:0.73rem; color:var(--text-light); display:flex; align-items:center; gap:4px; }
+  .card-cta {
+    background:var(--navy); color:var(--white); border:none;
+    padding:9px 16px; border-radius:8px;
+    font-family:'DM Sans',sans-serif; font-size:0.79rem; font-weight:600;
+    cursor:pointer; min-height:40px;
+  }
+  .card-cta:active { background:var(--navy-light); }
+
+  /* ---- BOTTOM NAV ---- */
+  .bottom-nav {
+    position:fixed; bottom:0; left:0; right:0;
+    height:calc(64px + var(--safe-bottom)); padding-bottom:var(--safe-bottom);
+    background:var(--white); border-top:1px solid var(--cream-dark);
+    display:flex; align-items:stretch; z-index:95;
+    box-shadow:0 -4px 18px rgba(11,31,58,0.08);
+  }
+  .bnav-item {
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+    background:none; border:none; cursor:pointer;
+    font-family:'DM Sans',sans-serif; color:var(--text-light);
+    font-size:0.63rem; font-weight:500; padding:0 4px; transition:color 0.12s;
+  }
+  .bnav-item.active { color:var(--navy); }
+  .bnav-icon { width:24px; height:24px; display:flex; align-items:center; justify-content:center; border-radius:8px; }
+  .bnav-item.active .bnav-icon { background:rgba(11,31,58,0.08); }
+  .bnav-center { flex:1.2; }
+  .bnav-center .bnav-icon { width:42px; height:42px; background:var(--gold); border-radius:14px; }
+  .bnav-center { color:var(--navy)!important; font-weight:600!important; }
+
+  /* ---- PROFILE VIEW ---- */
+  .profile-view {
+    display:none; position:fixed; inset:0;
+    background:var(--cream); z-index:200;
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+  }
+  .profile-view.active { display:block; }
+
+  .profile-topbar {
+    background:var(--navy); padding:0 16px;
+    height:calc(52px + var(--safe-top)); padding-top:var(--safe-top);
+    display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:10;
+  }
+  .back-btn {
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,0.1); border:none;
+    font-family:'DM Sans',sans-serif; font-size:0.83rem;
+    color:var(--white); cursor:pointer; font-weight:500;
+    padding:8px 14px; border-radius:100px; min-height:40px;
+  }
+  .verified-badge {
+    display:flex; align-items:center; gap:6px;
+    background:rgba(45,134,83,0.18); border:1px solid rgba(45,134,83,0.3);
+    border-radius:100px; padding:5px 11px;
+    font-size:0.7rem; color:#5DC991; font-weight:500;
+  }
+  .verified-dot { width:5px; height:5px; border-radius:50%; background:#5DC991; flex-shrink:0; }
+
+  .profile-hero {
+    background:linear-gradient(160deg,var(--navy) 0%,#0D2545 70%,#162F52 100%);
+    padding:26px 20px 36px; position:relative; overflow:hidden;
+  }
+  .profile-hero::after {
+    content:''; position:absolute; right:-60px; top:-60px;
+    width:240px; height:240px; border-radius:50%;
+    background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 65%);
+    pointer-events:none;
+  }
+  .p-avatar {
+    width:76px; height:76px; border-radius:50%;
+    border:3px solid rgba(201,168,76,0.45);
+    background:var(--navy-light); display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:1.9rem; color:var(--gold);
+    margin-bottom:14px; position:relative; z-index:1;
+  }
+  .p-elite-badge {
+    display:inline-flex; align-items:center; gap:5px;
+    background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+    color:var(--gold); padding:4px 11px; border-radius:100px;
+    font-size:0.67rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+    margin-bottom:9px; position:relative; z-index:1;
+  }
+  .p-name { font-family:'Playfair Display',serif; font-size:1.75rem; color:var(--white); margin-bottom:4px; line-height:1.15; position:relative; z-index:1; }
+  .p-desig { font-size:0.8rem; color:rgba(255,255,255,0.48); margin-bottom:14px; position:relative; z-index:1; }
+  .p-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:22px; position:relative; z-index:1; }
+  .p-tag { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.8); font-size:0.71rem; font-weight:500; padding:5px 11px; border-radius:100px; }
+  .p-actions { display:flex; gap:10px; position:relative; z-index:1; }
+  .btn-prim {
+    flex:1; background:var(--gold); color:var(--navy); border:none;
+    padding:14px; border-radius:10px; font-family:'DM Sans',sans-serif;
+    font-size:0.87rem; font-weight:700; cursor:pointer; min-height:48px;
+  }
+  .btn-prim:active { background:var(--gold-light); }
+  .btn-sec {
+    flex:1; background:rgba(255,255,255,0.1); color:var(--white);
+    border:1px solid rgba(255,255,255,0.2);
+    padding:14px; border-radius:10px; font-family:'DM Sans',sans-serif;
+    font-size:0.87rem; font-weight:500; cursor:pointer; min-height:48px;
+  }
+  .btn-sec:active { background:rgba(255,255,255,0.16); }
+
+  /* Profile content */
+  .p-content { padding:14px 16px calc(80px + var(--safe-bottom)); }
+
+  .p-card { background:var(--white); border-radius:16px; padding:18px; border:1px solid var(--cream-dark); margin-bottom:12px; }
+  .p-card h3 { font-family:'Playfair Display',serif; font-size:0.98rem; color:var(--navy); margin-bottom:13px; padding-bottom:11px; border-bottom:1px solid var(--cream-dark); }
+
+  .info-tiles { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .info-tile { background:var(--cream); border-radius:10px; padding:11px; }
+  .info-tile-icon { font-size:1.1rem; margin-bottom:4px; }
+  .info-tile-label { font-size:0.65rem; color:var(--text-light); font-weight:600; letter-spacing:0.04em; text-transform:uppercase; }
+  .info-tile-value { font-size:0.8rem; color:var(--navy); font-weight:600; margin-top:2px; }
+
+  .bio-text { font-size:0.86rem; color:var(--text-mid); line-height:1.75; }
+  .read-more { background:none; border:none; color:var(--gold); font-family:'DM Sans',sans-serif; font-size:0.82rem; font-weight:600; cursor:pointer; padding:8px 0 0; display:block; }
+
+  .cert-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .cert-item { display:flex; align-items:center; gap:11px; font-size:0.83rem; color:var(--text-mid); padding:10px; background:var(--cream); border-radius:10px; }
+  .cert-icon { width:36px; height:36px; border-radius:8px; background:var(--navy); display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:700; color:var(--gold); flex-shrink:0; }
+
+  .exp-timeline { display:flex; flex-direction:column; gap:14px; }
+  .exp-item { display:flex; gap:13px; }
+  .exp-dot-col { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+  .exp-circle { width:10px; height:10px; border-radius:50%; background:var(--gold); margin-top:4px; }
+  .exp-line { width:1px; flex:1; background:var(--cream-dark); margin-top:4px; }
+  .exp-role { font-size:0.86rem; font-weight:600; color:var(--navy); }
+  .exp-co { font-size:0.76rem; color:var(--text-light); margin-top:2px; }
+
+  .conforme-list { display:flex; flex-direction:column; gap:8px; }
+  .conforme-item { display:flex; align-items:center; gap:9px; background:rgba(45,134,83,0.07); border:1px solid rgba(45,134,83,0.18); border-radius:10px; padding:10px 13px; font-size:0.81rem; color:var(--success); font-weight:500; }
+  .c-dot { width:6px; height:6px; border-radius:50%; background:var(--success); flex-shrink:0; }
+
+  .client-cta-block { background:linear-gradient(135deg,var(--navy) 0%,#142B4E 100%); border-radius:16px; padding:22px 18px; margin-bottom:12px; border:1px solid rgba(201,168,76,0.15); }
+  .client-cta-block h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--white); margin-bottom:7px; }
+  .client-cta-block p { font-size:0.81rem; color:rgba(255,255,255,0.52); line-height:1.6; margin-bottom:16px; }
+  .client-login-btn {
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.3);
+    color:var(--gold); padding:13px 18px; border-radius:10px;
+    font-family:'DM Sans',sans-serif; font-size:0.87rem; font-weight:600;
+    cursor:pointer; text-decoration:none; min-height:50px; width:100%;
+  }
+  .client-login-btn:active { background:rgba(201,168,76,0.25); }
+
+  .contact-block { background:var(--navy); border-radius:16px; padding:20px 18px; margin-bottom:12px; }
+  .contact-block h3 { font-family:'Playfair Display',serif; font-size:1rem; color:var(--white); margin-bottom:14px; }
+  .contact-form { display:flex; flex-direction:column; gap:9px; }
+  .form-inp {
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+    border-radius:10px; padding:13px 14px;
+    font-family:'DM Sans',sans-serif; font-size:0.92rem; color:var(--white);
+    width:100%; outline:none; min-height:50px; -webkit-appearance:none;
+  }
+  .form-inp::placeholder { color:rgba(255,255,255,0.3); }
+  .form-inp:focus { border-color:rgba(201,168,76,0.5); }
+  .form-ta { resize:none; height:95px; min-height:unset; }
+  .submit-btn {
+    background:var(--gold); color:var(--navy); border:none;
+    padding:14px; border-radius:10px;
+    font-family:'DM Sans',sans-serif; font-size:0.92rem; font-weight:700;
+    cursor:pointer; width:100%; min-height:52px;
+  }
+  .submit-btn:active { background:var(--gold-light); }
+
+  .empty-card { background:var(--white); border:1px solid var(--cream-dark); border-radius:16px; padding:36px 20px; text-align:center; color:var(--text-light); font-size:0.87rem; }
+
+  /* ---- DESKTOP OVERRIDES ---- */
+  @media(min-width:768px){
+    body { padding-bottom:0; }
+    nav.top-nav { padding:0 40px; height:70px; }
+    .hamburger { display:none; }
+    .nav-links-desktop { display:flex; }
+    .bottom-nav { display:none; }
+
+    .hero { padding:80px 40px 56px; }
+    .hero-content { max-width:1100px; margin:0 auto; }
+    .hero h1 { font-size:3.2rem; max-width:600px; }
+    .hero p { font-size:1.05rem; max-width:480px; }
+
+    .search-container { flex-direction:row; max-width:680px; }
+    .search-field { flex:1; }
+    .search-btn { width:auto; padding:12px 28px; min-height:auto; }
+
+    .hero-stats { background:transparent; border:none; border-radius:0; gap:40px; max-width:none; width:fit-content; }
+    .stat { align-items:flex-start; border-right:none; padding:0; }
+    .stat-num { font-size:1.8rem; }
+    .stat-label { font-size:0.78rem; }
+
+    .filter-section { top:70px; }
+    .filter-cats { padding:0 40px; }
+    .filter-chips-row { padding:9px 40px; }
+    .filter-cat-btn { padding:12px 16px; font-size:0.82rem; }
+
+    .main { max-width:1100px; margin:0 auto; padding:44px 40px; }
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:22px; }
+    .conseiller-card { flex-direction:column; }
+    .card-top { flex-direction:column; align-items:flex-start; padding:26px 22px 18px; }
+    .card-avatar { width:62px; height:62px; font-size:1.5rem; margin-bottom:12px; }
+    .card-name { font-size:1.1rem; white-space:normal; }
+    .section-title { font-size:1.55rem; }
+
+    .profile-topbar { padding:0 40px; height:60px; }
+    .profile-hero { padding:56px 40px 72px; }
+    .p-content { max-width:1000px; margin:-28px auto 0; padding:0 40px 60px; display:grid; grid-template-columns:1fr 320px; gap:22px; }
+    .p-name { font-size:2.2rem; }
+    .p-avatar { width:110px; height:110px; font-size:2.6rem; }
+
+    .profile-hero .hero-inner-flex { display:flex; gap:40px; align-items:flex-start; max-width:1000px; margin:0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ======= MAIN APP ======= -->
+<div id="mainApp">
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="logo">Fin<span>Conseils</span></div>
+    <ul class="nav-links-desktop">
+      <li><a href="#">Trouver un conseiller</a></li>
+      <li><a href="#">Comment ça fonctionne</a></li>
+      <li><a href="#">Pour les conseillers</a></li>
+      <li><a href="#" class="nav-cta">Espace client</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#">🔍 Trouver un conseiller</a>
+    <a href="#">❓ Comment ça fonctionne</a>
+    <a href="#">💼 Pour les conseillers</a>
+    <a href="#">📊 Ressources financières</a>
+    <a href="#" class="d-cta">🔐 Espace client</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Québec · Conforme CSF</div>
+      <h1>Trouvez le conseiller qui comprend <em>vraiment</em> votre situation</h1>
+      <p>Des professionnels certifiés, spécialisés dans votre réalité — entrepreneurs incorporés, retraite, protection familiale.</p>
+      <div class="hero-slogan">
+        <span class="slogan-line"></span>
+        <span class="slogan-text">Pour ceux qui veulent bâtir des <em>relations</em>, pas des transactions.</span>
+        <span class="slogan-line"></span>
+      </div>
+
+      <div class="search-container">
+        <div class="search-field">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <select>
+            <option>📍 Tout le Québec</option>
+            <optgroup label="Grand Montréal">
+              <option>Montréal</option>
+              <option>Laval</option>
+              <option>Montérégie</option>
+              <option>Laurentides</option>
+              <option>Lanaudière</option>
+            </optgroup>
+            <optgroup label="Capitale-Nationale">
+              <option>Québec (ville)</option>
+              <option>Chaudière-Appalaches</option>
+              <option>Charlevoix</option>
+            </optgroup>
+            <optgroup label="Régions du centre">
+              <option>Mauricie</option>
+              <option>Centre-du-Québec</option>
+              <option>Estrie (Cantons-de-l'Est)</option>
+            </optgroup>
+            <optgroup label="Régions de l'Ouest">
+              <option>Outaouais</option>
+              <option>Abitibi-Témiscamingue</option>
+            </optgroup>
+            <optgroup label="Régions du Nord et Est">
+              <option>Saguenay–Lac-Saint-Jean</option>
+              <option>Bas-Saint-Laurent</option>
+              <option>Gaspésie–Îles-de-la-Madeleine</option>
+              <option>Côte-Nord</option>
+              <option>Nord-du-Québec</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="search-field">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Spécialité ou nom...">
+        </div>
+        <button class="search-btn">🔍 Rechercher</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">247</span><span class="stat-label">Conseillers</span></div>
+        <div class="stat"><span class="stat-num">18</span><span class="stat-label">Régions</span></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Conformes CSF</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTERS -->
+  <div class="filter-section">
+    <div class="filter-cats">
+      <button class="filter-cat-btn active" onclick="switchCat(this,'all')">🔍 Tous</button>
+      <button class="filter-cat-btn" onclick="switchCat(this,'assurance')">🛡️ Assurance</button>
+      <button class="filter-cat-btn" onclick="switchCat(this,'placement')">📈 Placements</button>
+      <button class="filter-cat-btn" onclick="switchCat(this,'entrepreneur')">🏢 Entrepreneur</button>
+      <button class="filter-cat-btn" onclick="switchCat(this,'retraite')">🌅 Retraite</button>
+      <button class="filter-cat-btn" onclick="switchCat(this,'famille')">👨‍👩‍👧 Famille</button>
+      <button class="filter-cat-btn" onclick="switchCat(this,'succession')">⚖️ Succession</button>
+    </div>
+    <div class="filter-chips-row">
+      <div class="region-wrapper">
+        <button class="region-btn" id="regionBtn" onclick="openSheet()">
+          📍 Tout le Québec <span class="arrow">▼</span>
+        </button>
+      </div>
+      <div style="width:1px;height:20px;background:var(--cream-dark);flex-shrink:0;margin:0 2px;"></div>
+      <div id="chips" style="display:flex;gap:6px;flex-shrink:0;"></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="featured-label">Conseillers Élite</div>
+    <div class="section-header">
+      <h2 class="section-title">Mis en avant</h2>
+      <span class="section-count">3 conseillers</span>
+    </div>
+
+    <div class="cards-grid">
+
+      <div class="conseiller-card" onclick="openProfile()">
+        <div class="card-top">
+          <div class="card-badge-elite">⭐ Élite</div>
+          <div class="card-avatar">T</div>
+          <div class="card-info">
+            <div class="card-name">Tony Tremblay</div>
+            <div class="card-title">CSF · Conseiller en sécurité financière</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-specialties">
+            <span class="specialty-tag">Assurance participante</span>
+            <span class="specialty-tag">Entrepreneur</span>
+            <span class="specialty-tag">Montréal</span>
+          </div>
+          <p class="card-bio">Spécialisé dans les stratégies d'assurance participante pour entrepreneurs incorporés. Optimisez votre fiscalité tout en bâtissant un patrimoine solide.</p>
+          <div class="card-meta">
+            <span class="card-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Montréal, QC</span>
+            <button class="card-cta" onclick="openProfile();event.stopPropagation()">Voir le profil</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="conseiller-card">
+        <div class="card-top">
+          <div class="card-badge-elite">⭐ Élite</div>
+          <div class="card-avatar">S</div>
+          <div class="card-info">
+            <div class="card-name">Sophie Beaumont</div>
+            <div class="card-title">CSF · Planificatrice financière</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-specialties">
+            <span class="specialty-tag">Retraite</span>
+            <span class="specialty-tag">REER/CELI</span>
+            <span class="specialty-tag">Famille</span>
+          </div>
+          <p class="card-bio">15 ans d'expérience en planification de retraite pour professionnels. Approche globale intégrant protection, épargne et fiscalité.</p>
+          <div class="card-meta">
+            <span class="card-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Québec, QC</span>
+            <button class="card-cta">Voir le profil</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="conseiller-card">
+        <div class="card-top">
+          <div class="card-badge-elite">⭐ Élite</div>
+          <div class="card-avatar">M</div>
+          <div class="card-info">
+            <div class="card-name">Marc-Antoine Gagnon</div>
+            <div class="card-title">CSF · Conseiller en assurance</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-specialties">
+            <span class="specialty-tag">Vie entière</span>
+            <span class="specialty-tag">Invalidité</span>
+            <span class="specialty-tag">Succession</span>
+          </div>
+          <p class="card-bio">Expert en protection du patrimoine familial et succession. Stratégies d'assurance adaptées à vos objectifs à long terme.</p>
+          <div class="card-meta">
+            <span class="card-location"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Laval, QC</span>
+            <button class="card-cta">Voir le profil</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="height:18px;"></div>
+    <div class="section-header">
+      <h2 class="section-title">Tous les conseillers</h2>
+      <span class="section-count">244 résultats</span>
+    </div>
+    <div class="empty-card">Les autres profils se chargeraient ici avec pagination ↓</div>
+  </main>
+
+</div>
+
+<!-- ======= REGION SHEET ======= -->
+<div class="region-sheet" id="regionSheet">
+  <div class="region-backdrop" onclick="closeSheet()"></div>
+  <div class="region-panel">
+    <div class="sheet-handle"></div>
+    <div class="sheet-title">Choisir une région</div>
+
+    <!-- Tout le Québec -->
+    <div style="padding:0 14px 10px;">
+      <button class="region-opt active region-all-opt" style="width:100%;justify-content:center;gap:10px;" onclick="pickRegion(this,'Tout le Québec')">
+        🌐 Tout le Québec — afficher tous les conseillers
+      </button>
+    </div>
+
+    <!-- Grand Montréal -->
+    <div class="region-group-label">🏙️ Grand Montréal</div>
+    <div class="region-grid">
+      <button class="region-opt" onclick="pickRegion(this,'Montréal')">Montréal<span class="region-count">89</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Laval')">Laval<span class="region-count">22</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Montérégie')">Montérégie<span class="region-count">19</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Laurentides')">Laurentides<span class="region-count">14</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Lanaudière')">Lanaudière<span class="region-count">11</span></button>
+    </div>
+
+    <!-- Capitale-Nationale -->
+    <div class="region-group-label">🏰 Capitale-Nationale</div>
+    <div class="region-grid">
+      <button class="region-opt" onclick="pickRegion(this,'Québec (ville)')">Québec (ville)<span class="region-count">41</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Chaudière-Appalaches')">Chaudière-Appalaches<span class="region-count">9</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Charlevoix')">Charlevoix<span class="region-count">3</span></button>
+    </div>
+
+    <!-- Centre du Québec -->
+    <div class="region-group-label">🌾 Centre du Québec</div>
+    <div class="region-grid">
+      <button class="region-opt" onclick="pickRegion(this,'Mauricie')">Mauricie<span class="region-count">8</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Centre-du-Québec')">Centre-du-Québec<span class="region-count">6</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Estrie')">Estrie (Cantons-de-l'Est)<span class="region-count">10</span></button>
+    </div>
+
+    <!-- Régions de l'Ouest -->
+    <div class="region-group-label">🍂 Ouest du Québec</div>
+    <div class="region-grid">
+      <button class="region-opt" onclick="pickRegion(this,'Outaouais')">Outaouais<span class="region-count">7</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Abitibi-Témiscamingue')">Abitibi-Témiscamingue<span class="region-count">4</span></button>
+    </div>
+
+    <!-- Régions du Nord et de l'Est -->
+    <div class="region-group-label">🌲 Nord et Est</div>
+    <div class="region-grid">
+      <button class="region-opt" onclick="pickRegion(this,'Saguenay–Lac-Saint-Jean')">Saguenay–Lac-St-Jean<span class="region-count">9</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Bas-Saint-Laurent')">Bas-Saint-Laurent<span class="region-count">5</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Gaspésie–Îles-de-la-Madeleine')">Gaspésie–Î.-de-la-M.<span class="region-count">3</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Côte-Nord')">Côte-Nord<span class="region-count">2</span></button>
+      <button class="region-opt" onclick="pickRegion(this,'Nord-du-Québec')">Nord-du-Québec<span class="region-count">1</span></button>
+    </div>
+
+    <div style="height:10px;"></div>
+  </div>
+</div>
+
+<!-- ======= PROFILE VIEW ======= -->
+<div class="profile-view" id="profileView">
+  <div class="profile-topbar">
+    <button class="back-btn" onclick="closeProfile()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Retour
+    </button>
+    <div class="verified-badge"><div class="verified-dot"></div>Profil vérifié</div>
+  </div>
+
+  <div class="profile-hero">
+    <div class="hero-inner-flex">
+      <div class="p-avatar">T</div>
+      <div>
+        <div class="p-elite-badge">⭐ Conseiller Élite</div>
+        <h1 class="p-name">Tony Tremblay</h1>
+        <p class="p-desig">CSF · Conseiller en sécurité financière · Montréal, QC</p>
+        <div class="p-tags">
+          <span class="p-tag">Assurance participante</span>
+          <span class="p-tag">Entrepreneur incorporé</span>
+          <span class="p-tag">Fiscalité corporative</span>
+          <span class="p-tag">Patrimoine</span>
+        </div>
+        <div class="p-actions">
+          <button class="btn-prim">📅 Rendez-vous</button>
+          <button class="btn-sec">✉️ Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-content" id="profileContent">
+
+    <div><!-- main col -->
+
+      <!-- Infos rapides -->
+      <div class="p-card">
+        <h3>Informations pratiques</h3>
+        <div class="info-tiles">
+          <div class="info-tile"><div class="info-tile-icon">📍</div><div class="info-tile-label">Région</div><div class="info-tile-value">Montréal & environs</div></div>
+          <div class="info-tile"><div class="info-tile-icon">🗣️</div><div class="info-tile-label">Langues</div><div class="info-tile-value">FR · EN</div></div>
+          <div class="info-tile"><div class="info-tile-icon">📅</div><div class="info-tile-label">Consultation</div><div class="info-tile-value">En ligne & en personne</div></div>
+          <div class="info-tile"><div class="info-tile-icon">⏱️</div><div class="info-tile-label">Délai de réponse</div><div class="info-tile-value">Moins de 24h</div></div>
+        </div>
+      </div>
+
+      <!-- À propos -->
+      <div class="p-card">
+        <h3>À propos</h3>
+        <p class="bio-text" id="bioText">Depuis plus de 10 ans, j'accompagne des entrepreneurs incorporés dans la mise en place de stratégies financières solides. Ma spécialité : l'assurance participante comme outil de planification fiscale.</p>
+        <button class="read-more" id="readMoreBtn" onclick="toggleBio()">Lire plus ▾</button>
+      </div>
+
+      <!-- Certifications -->
+      <div class="p-card">
+        <h3>Certifications & accréditations</h3>
+        <ul class="cert-list">
+          <li class="cert-item"><div class="cert-icon">CSF</div>Membre actif — Chambre de la sécurité financière</li>
+          <li class="cert-item"><div class="cert-icon">AMF</div>Inscrit à l'Autorité des marchés financiers</li>
+          <li class="cert-item"><div class="cert-icon">PAR</div>Spécialiste en assurance participante</li>
+          <li class="cert-item"><div class="cert-icon">FP</div>Formation avancée — Planification financière</li>
+        </ul>
+      </div>
+
+      <!-- Parcours -->
+      <div class="p-card">
+        <h3>Parcours professionnel</h3>
+        <div class="exp-timeline">
+          <div class="exp-item"><div class="exp-dot-col"><div class="exp-circle"></div><div class="exp-line"></div></div><div><div class="exp-role">Conseiller en sécurité financière — Indépendant</div><div class="exp-co">2018 — Présent · Montréal, QC</div></div></div>
+          <div class="exp-item"><div class="exp-dot-col"><div class="exp-circle"></div><div class="exp-line"></div></div><div><div class="exp-role">Conseiller principal — Cabinet XYZ</div><div class="exp-co">2014 — 2018 · Montréal, QC</div></div></div>
+          <div class="exp-item"><div class="exp-dot-col"><div class="exp-circle"></div></div><div><div class="exp-role">Représentant en assurance — Démarrage</div><div class="exp-co">2012 — 2014 · Laval, QC</div></div></div>
+        </div>
+      </div>
+
+      <!-- Conformité -->
+      <div class="p-card">
+        <h3>Conformité & transparence</h3>
+        <div class="conforme-list">
+          <div class="conforme-item"><div class="c-dot"></div>Profil vérifié par FinConseils</div>
+          <div class="conforme-item"><div class="c-dot"></div>Inscrit et en règle — CSF</div>
+          <div class="conforme-item"><div class="c-dot"></div>Inscrit et en règle — AMF</div>
+        </div>
+      </div>
+
+      <!-- Espace client -->
+      <div class="client-cta-block">
+        <h3>🔐 Espace client sécurisé</h3>
+        <p>Vous êtes déjà client de Tony ? Accédez à vos illustrations d'assurance et présentations de portefeuille partagées.</p>
+        <a href="#" class="client-login-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Accéder à mon espace client
+        </a>
+      </div>
+
+    </div><!-- end main col -->
+
+    <div><!-- sidebar col -->
+      <div class="contact-block">
+        <h3>Prendre contact</h3>
+        <div class="contact-form">
+          <input class="form-inp" type="text" placeholder="Votre prénom et nom" autocomplete="name">
+          <input class="form-inp" type="email" placeholder="Votre courriel" autocomplete="email">
+          <input class="form-inp" type="tel" placeholder="Votre téléphone" autocomplete="tel">
+          <textarea class="form-inp form-ta" placeholder="Décrivez brièvement votre situation..."></textarea>
+          <button class="submit-btn">Envoyer ma demande →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======= BOTTOM NAV ======= -->
+<nav class="bottom-nav">
+  <button class="bnav-item active" onclick="closeProfile()">
+    <div class="bnav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Rechercher
+  </button>
+  <button class="bnav-item">
+    <div class="bnav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+    Favoris
+  </button>
+  <button class="bnav-item bnav-center">
+    <div class="bnav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+    Mon espace
+  </button>
+  <button class="bnav-item">
+    <div class="bnav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+    Messages
+  </button>
+  <button class="bnav-item">
+    <div class="bnav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    Profil
+  </button>
+</nav>
+
+<script>
+  // Filter data
+  const cats = {
+    all:['Tous','Assurance participante','Assurance invalidité','Entrepreneur incorporé','Retraite & REER','CELI & épargne','Placements','Succession','Jeune famille','Maladies graves','Soins longue durée','En ligne seulement'],
+    assurance:['Tous','Assurance participante','Assurance vie entière','Assurance vie temporaire','Assurance invalidité','Maladies graves','Soins longue durée','Assurance collective','Assurance hypothécaire','Assurance voyage'],
+    placement:['Tous','Placements & portefeuille','Fonds distincts','Fonds communs','REER collectif','CELI & épargne','REEE','Gestion discrétionnaire','FNB & passif','Marché monétaire'],
+    entrepreneur:['Tous','Entrepreneur incorporé','Holding & soc. de gestion','Dividendes & rémunération','Assurance corporative','Retraite entrepreneur',"Vente d'entreprise","Relève d'entreprise",'Fiducie familiale','Gel successoral','Protection associés'],
+    retraite:['Tous','Retraite & REER','FERR & décaissement','Rente viagère','Retraite entrepreneur','Pension (RRQ/RPC)','Retraite précoce (FIRE)','Optimisation fiscale retraite'],
+    famille:['Tous','Jeune famille','REEE & études','Protection enfants','Assurance hypothécaire','Assurance vie familiale','Besoins spéciaux & fiducie','Divorce & séparation'],
+    succession:['Tous','Succession','Testament & mandats','Fiducie familiale','Gel successoral','Transfert intergénérationnel','Legs philanthropique','Assurance succession'],
+  };
+  let activeCat='all', activeChip='Tous';
+
+  function renderChips(cat){
+    const c=document.getElementById('chips'); c.innerHTML='';
+    cats[cat].forEach(l=>{
+      const b=document.createElement('button');
+      b.className='filter-chip'+(l===activeChip?' active':'');
+      b.textContent=l;
+      b.onclick=()=>{ document.querySelectorAll('#chips .filter-chip').forEach(x=>x.classList.remove('active')); b.classList.add('active'); activeChip=l; };
+      c.appendChild(b);
+    });
+  }
+  function switchCat(el,cat){
+    document.querySelectorAll('.filter-cat-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active');
+    activeCat=cat; activeChip='Tous'; renderChips(cat);
+  }
+
+  // Region sheet
+  function openSheet(){ document.getElementById('regionSheet').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeSheet(){ document.getElementById('regionSheet').classList.remove('open'); document.body.style.overflow=''; }
+  function pickRegion(el,name){
+    document.querySelectorAll('.region-opt').forEach(o=>o.classList.remove('active')); el.classList.add('active');
+    const label = name==='Tout le Québec' ? '📍 Tout le Québec' : '📍 '+name;
+    document.getElementById('regionBtn').innerHTML=label+' <span class="arrow">▼</span>';
+    closeSheet();
+  }
+
+  // Hamburger
+  function toggleDrawer(){
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileDrawer').classList.toggle('open');
+  }
+
+  // Profile
+  function openProfile(){ const p=document.getElementById('profileView'); p.classList.add('active'); p.scrollTop=0; document.body.style.overflow='hidden'; }
+  function closeProfile(){ document.getElementById('profileView').classList.remove('active'); document.body.style.overflow=''; }
+
+  // Bio toggle
+  let bioOpen=false;
+  const fullBio=`Depuis plus de 10 ans, j'accompagne des entrepreneurs incorporés dans la mise en place de stratégies financières solides et adaptées à leur réalité d'affaires. Ma spécialité : l'assurance participante comme outil de planification fiscale et de constitution de patrimoine.<br><br>Ce qui me distingue, c'est ma capacité à expliquer des concepts complexes de manière claire et accessible. Je crois qu'un client bien informé prend de meilleures décisions.<br><br>Mon approche est holistique : je regarde votre situation dans sa globalité avant de recommander quoi que ce soit.`;
+  function toggleBio(){
+    const bio=document.getElementById('bioText'), btn=document.getElementById('readMoreBtn');
+    bioOpen=!bioOpen;
+    if(bioOpen){ bio.innerHTML=fullBio; btn.textContent='Lire moins ▴'; }
+    else{ bio.textContent='Depuis plus de 10 ans, j\'accompagne des entrepreneurs incorporés dans la mise en place de stratégies financières solides. Ma spécialité : l\'assurance participante comme outil de planification fiscale.'; btn.textContent='Lire plus ▾'; }
+  }
+
+  // Desktop: profile hero flex layout
+  function applyDesktop(){
+    if(window.innerWidth>=768){
+      const hi=document.querySelector('.hero-inner-flex');
+      if(hi){ hi.style.display='flex'; hi.style.gap='40px'; hi.style.alignItems='flex-start'; hi.style.maxWidth='1000px'; hi.style.margin='0 auto'; }
+    }
+  }
+  window.addEventListener('resize',applyDesktop);
+  applyDesktop();
+  renderChips('all');
+</script>
+</body>
+</html>
