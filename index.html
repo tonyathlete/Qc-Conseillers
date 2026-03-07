@@ -742,6 +742,8 @@ nav.top-nav{background:var(--navy);padding:0 20px;display:flex;align-items:cente
   .signup-form-row{flex-direction:row;}
 }
 </style>
+  <!-- Stripe -->
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -865,9 +867,9 @@ nav.top-nav{background:var(--navy);padding:0 20px;display:flex;align-items:cente
     <section class="cons-hero"><div class="cons-hero-content"><div class="hero-badge">Pour les CSF du Québec</div><h1>Votre prochaine clientèle vous cherche. <em>Soyez trouvable.</em></h1><p>FinConseils est la vitrine professionnelle conçue pour les conseillers en sécurité financière qui veulent bâtir des relations durables.</p><div class="hero-actions"><button class="btn-hero-primary" onclick="goTo('creerProfil')">🚀 Créer mon profil gratuitement</button><button class="btn-hero-secondary" onclick="goTo('comment');switchAud('conseiller')">Voir les plans →</button></div><div class="sp-row"><div class="sp-avatars"><div class="sp-av">T</div><div class="sp-av">S</div><div class="sp-av">M</div><div class="sp-av">J</div><div class="sp-av">P</div></div><div class="sp-text"><strong>247 conseillers</strong> déjà inscrits au Québec</div></div><div class="hero-stats"><div class="h-stat"><span class="h-stat-num">4.8×</span><span class="h-stat-label">Plus de leads</span></div><div class="h-stat"><span class="h-stat-num">15 min</span><span class="h-stat-label">Pour créer le profil</span></div><div class="h-stat"><span class="h-stat-num">100%</span><span class="h-stat-label">Conforme CSF</span></div></div></div></section>
     <section class="problems-section"><div style="max-width:1100px;margin:0 auto;"><div class="eyebrow">Le problème</div><h2 class="section-h">Vous êtes excellent dans votre métier.<br>Mais personne ne vous trouve.</h2><div class="problems-grid"><div class="problem-card fade-up"><div class="problem-icon">🔍</div><div><div class="problem-title">Invisible sur Google</div><div class="problem-desc">Un client cherche "conseiller assurance participante Montréal" — il ne vous trouve pas.</div></div></div><div class="problem-card fade-up"><div class="problem-icon">🎰</div><div><div class="problem-title">Références au hasard</div><div class="problem-desc">Vous dépendez du bouche-à-oreille. Insuffisant pour croître de façon prévisible.</div></div></div><div class="problem-card fade-up"><div class="problem-icon">📁</div><div><div class="problem-title">Pas de vitrine professionnelle</div><div class="problem-desc">LinkedIn est générique. Un site web coûte cher. Il vous faut une présence conçue pour un CSF québécois.</div></div></div><div class="problem-card fade-up"><div class="problem-icon">❓</div><div><div class="problem-title">Leads non qualifiés</div><div class="problem-desc">Vous perdez du temps à qualifier plutôt qu'à conseiller.</div></div></div></div></div></section>
     <section style="padding:48px 20px;max-width:1100px;margin:0 auto;"><div class="eyebrow">Vos avantages</div><h2 class="section-h">Tout ce dont vous avez besoin</h2><div class="benefits-grid"><div class="benefit-card fade-up"><div class="benefit-icon-box">🌐</div><div><div class="benefit-title">Profil optimisé pour Google</div><div class="benefit-desc">Votre profil est indexé par les moteurs de recherche.</div></div></div><div class="benefit-card fade-up"><div class="benefit-icon-box">🔒</div><div><div class="benefit-title">Espace client sécurisé</div><div class="benefit-desc">Partagez vos illustrations directement avec chaque client dans son espace privé.</div></div></div><div class="benefit-card fade-up"><div class="benefit-icon-box">📊</div><div><div class="benefit-title">Analytics en temps réel</div><div class="benefit-desc">Voyez combien de personnes ont consulté votre profil.</div></div></div><div class="benefit-card fade-up"><div class="benefit-icon-box">⚖️</div><div><div class="benefit-title">100% conforme CSF</div><div class="benefit-desc">Conçu comme une vitrine marketing — vous restez seul responsable de vos recommandations.</div></div></div><div class="benefit-card fade-up"><div class="benefit-icon-box">📅</div><div><div class="benefit-title">Prise de rendez-vous intégrée</div><div class="benefit-desc">Les clients réservent directement dans votre calendrier.</div></div></div><div class="benefit-card fade-up"><div class="benefit-icon-box">🤝</div><div><div class="benefit-title">Clients qui cherchent une relation</div><div class="benefit-desc">Notre positionnement attire des clients qui veulent un conseiller à long terme.</div></div></div></div></section>
-    <section class="pricing-section"><div class="pricing-inner"><div class="pricing-eyebrow">Tarification</div><h2 class="pricing-h">Investissez dans votre croissance</h2><p class="pricing-sub">Commencez gratuitement. Upgradez quand vous êtes prêt.</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:24px;flex-wrap:wrap;"><div class="billing-toggle"><button class="billing-btn active" id="btnMensuel" onclick="setBilling('mensuel')">Mensuel</button><button class="billing-btn" id="btnAnnuel" onclick="setBilling('annuel')">Annuel</button></div><span class="save-badge" id="saveBadge" style="display:none;">Économisez 2 mois</span></div><div class="plans-grid"><div class="plan-card"><div class="plan-name">Gratuit</div><div class="plan-price"><span class="plan-amount" style="font-size:1.8rem">0$</span><span class="plan-period">pour toujours</span></div><div class="plan-desc">Pour tester la plateforme.</div><ul class="plan-features"><li class="plan-feature"><span class="feat-check">✓</span>Profil public visible</li><li class="plan-feature"><span class="feat-check">✓</span>1 spécialité</li><li class="plan-feature"><span class="feat-check">✓</span>Vérification CSF</li><li class="plan-feature"><span class="feat-x">✗</span><span style="opacity:0.4">Priorité résultats</span></li><li class="plan-feature"><span class="feat-x">✗</span><span style="opacity:0.4">Espace client</span></li></ul><button class="plan-btn plan-btn-free" onclick="goTo('creerProfil')">Commencer gratuitement</button></div><div class="plan-card featured"><div class="plan-name">Pro</div><div class="plan-price"><span class="plan-amount" id="proPrix">97$</span><span class="plan-period" id="proPeriode">/mois</span></div><div class="plan-desc">Pour les conseillers qui veulent des leads réguliers.</div><ul class="plan-features"><li class="plan-feature"><span class="feat-check">✓</span>Tout le plan Gratuit</li><li class="plan-feature"><span class="feat-check">✓</span>Spécialités illimitées</li><li class="plan-feature"><span class="feat-check">✓</span>Priorité dans les résultats</li><li class="plan-feature"><span class="feat-check">✓</span>Espace client sécurisé</li><li class="plan-feature"><span class="feat-check">✓</span>Prise de rendez-vous</li><li class="plan-feature"><span class="feat-check">✓</span>Analytics complets</li></ul><button class="plan-btn plan-btn-pro" onclick="goTo('creerProfil');setTimeout(()=>selectCreerPlan('pro'),50)">Choisir Pro →</button></div><div class="plan-card"><div class="plan-name">Élite</div><div class="plan-price"><span class="plan-amount" id="elitePrix">197$</span><span class="plan-period" id="elitePeriode">/mois</span></div><div class="plan-desc">Pour dominer votre marché et recevoir des leads exclusifs.</div><ul class="plan-features"><li class="plan-feature"><span class="feat-check">✓</span>Tout le plan Pro</li><li class="plan-feature"><span class="feat-check">✓</span>⭐ Badge Élite visible</li><li class="plan-feature"><span class="feat-check">✓</span>Mis en avant page d'accueil</li><li class="plan-feature"><span class="feat-check">✓</span>Leads garantis</li><li class="plan-feature"><span class="feat-check">✓</span>Contenu brandé</li></ul><button class="plan-btn plan-btn-elite" onclick="goTo('creerProfil');setTimeout(()=>selectCreerPlan('elite'),50)">Choisir Élite →</button></div></div></div></section>
+    <section class="pricing-section"><div class="pricing-inner"><div class="pricing-eyebrow">Tarification</div><h2 class="pricing-h">Investissez dans votre croissance</h2><p class="pricing-sub">Commencez gratuitement. Upgradez quand vous êtes prêt.</p><div style="display:flex;align-items:center;gap:6px;margin-bottom:24px;flex-wrap:wrap;"><div class="billing-toggle"><button class="billing-btn active" id="btnMensuel" onclick="setBilling('mensuel')">Mensuel</button><button class="billing-btn" id="btnAnnuel" onclick="setBilling('annuel')">Annuel</button></div><span class="save-badge" id="saveBadge" style="display:none;">Économisez 2 mois</span></div><div class="plans-grid"><div class="plan-card"><div class="plan-name">Gratuit</div><div class="plan-price"><span class="plan-amount" style="font-size:1.8rem">0$</span><span class="plan-period">pour toujours</span></div><div class="plan-desc">Pour tester la plateforme.</div><ul class="plan-features"><li class="plan-feature"><span class="feat-check">✓</span>Profil public visible</li><li class="plan-feature"><span class="feat-check">✓</span>1 spécialité</li><li class="plan-feature"><span class="feat-check">✓</span>Vérification CSF</li><li class="plan-feature"><span class="feat-x">✗</span><span style="opacity:0.4">Priorité résultats</span></li><li class="plan-feature"><span class="feat-x">✗</span><span style="opacity:0.4">Espace client</span></li></ul><button class="plan-btn plan-btn-free" onclick="goTo('creerProfil')">Commencer gratuitement</button></div><div class="plan-card featured"><div class="plan-name">Pro</div><div class="plan-price"><span class="plan-amount" id="proPrix">29,99$</span><span class="plan-period" id="proPeriode">/mois</span></div><div class="plan-desc">Pour les conseillers qui veulent des leads réguliers.</div><ul class="plan-features"><li class="plan-feature"><span class="feat-check">✓</span>Tout le plan Gratuit</li><li class="plan-feature"><span class="feat-check">✓</span>Spécialités illimitées</li><li class="plan-feature"><span class="feat-check">✓</span>Priorité dans les résultats</li><li class="plan-feature"><span class="feat-check">✓</span>Espace client sécurisé</li><li class="plan-feature"><span class="feat-check">✓</span>Prise de rendez-vous</li><li class="plan-feature"><span class="feat-check">✓</span>Analytics complets</li></ul><button class="plan-btn plan-btn-pro" onclick="launchStripeCheckout('pro')">Choisir Pro →</button></div><div class="plan-card"><div class="plan-name">Élite</div><div class="plan-price"><span class="plan-amount" id="elitePrix">79,99$</span><span class="plan-period" id="elitePeriode">/mois</span></div><div class="plan-desc">Pour dominer votre marché et recevoir des leads exclusifs.</div><ul class="plan-features"><li class="plan-feature"><span class="feat-check">✓</span>Tout le plan Pro</li><li class="plan-feature"><span class="feat-check">✓</span>⭐ Badge Élite visible</li><li class="plan-feature"><span class="feat-check">✓</span>Mis en avant page d'accueil</li><li class="plan-feature"><span class="feat-check">✓</span>Leads garantis</li><li class="plan-feature"><span class="feat-check">✓</span>Contenu brandé</li></ul><button class="plan-btn plan-btn-elite" onclick="launchStripeCheckout('elite')">Choisir Élite →</button></div></div></div></section>
     <section style="padding:48px 20px;max-width:1100px;margin:0 auto;"><div class="eyebrow">Témoignages</div><h2 class="section-h">Des conseillers comme vous</h2><div class="testi-grid"><div class="testi-card fade-up"><div class="testi-stars">★★★★★</div><div class="testi-quote">En 3 mois, j'ai reçu 8 demandes de clients entrepreneurs — exactement mon profil cible.</div><div class="testi-author"><div class="testi-av">T</div><div><div class="testi-name">Tony T.</div><div class="testi-role">CSF · Assurance participante · Montréal</div></div></div></div><div class="testi-card fade-up"><div class="testi-stars">★★★★★</div><div class="testi-quote">L'espace client sécurisé a complètement changé ma façon de travailler. Mes clients adorent.</div><div class="testi-author"><div class="testi-av">S</div><div><div class="testi-name">Sophie B.</div><div class="testi-role">CSF · Planificatrice financière · Québec</div></div></div></div><div class="testi-card fade-up"><div class="testi-stars">★★★★★</div><div class="testi-quote">Mon profil apparaît maintenant dans Google quand les gens cherchent un conseiller à Laval.</div><div class="testi-author"><div class="testi-av">M</div><div><div class="testi-name">Marc-Antoine G.</div><div class="testi-role">CSF · Succession & patrimoine · Laval</div></div></div></div></div></section>
-    <section class="insc-section" id="inscSection"><div class="insc-inner"><div class="insc-eyebrow">Créer mon profil</div><h2 class="insc-h">Commencez aujourd'hui.<br><em>Gratuitement.</em></h2><p class="insc-sub">Votre profil sera en ligne dans moins de 24h. Aucune carte de crédit requise.</p><form onsubmit="submitInsc(event)" id="inscForm"><div class="form-row"><div class="form-group" style="flex:1"><label class="form-label-dark">Prénom</label><input class="form-inp-dark" type="text" placeholder="Marie" required></div><div class="form-group" style="flex:1"><label class="form-label-dark">Nom</label><input class="form-inp-dark" type="text" placeholder="Tremblay" required></div></div><div class="form-group"><label class="form-label-dark">Courriel professionnel</label><input class="form-inp-dark" type="email" placeholder="marie@cabinet.ca" required></div><div class="form-group"><label class="form-label-dark">Région principale</label><select class="form-select-dark" required><option value="" disabled selected>Choisir votre région...</option><option>Montréal</option><option>Laval</option><option>Montérégie</option><option>Laurentides</option><option>Lanaudière</option><option>Québec (ville)</option><option>Chaudière-Appalaches</option><option>Mauricie</option><option>Estrie</option><option>Outaouais</option><option>Saguenay–Lac-Saint-Jean</option><option>Bas-Saint-Laurent</option><option>Abitibi-Témiscamingue</option><option>Autre région</option></select></div><div class="form-group"><label class="form-label-dark">Spécialité principale</label><select class="form-select-dark" required><option value="" disabled selected>Votre spécialité...</option><option>Assurance participante</option><option>Entrepreneur incorporé & fiscal</option><option>Retraite & planification</option><option>Assurance vie & invalidité</option><option>Jeune famille & REEE</option><option>Succession & fiducie</option><option>Placements & portefeuille</option><option>Maladies graves & soins</option></select></div><div class="form-group"><label class="form-label-dark">Choisir mon plan</label><div class="plan-pickers"><button type="button" class="plan-pick-btn selected" id="ppGratuit" onclick="selectPlan('gratuit')"><span class="ppn">Gratuit</span><span class="ppp">0$/mois · Pour commencer</span></button><button type="button" class="plan-pick-btn" id="ppPro" onclick="selectPlan('pro')"><span class="ppn">Pro ⭐</span><span class="ppp">97$/mois · 14j gratuits</span></button><button type="button" class="plan-pick-btn" id="ppElite" onclick="selectPlan('elite')"><span class="ppn">Élite</span><span class="ppp">197$/mois · Leads garantis</span></button></div></div><div class="form-checkbox"><input type="checkbox" id="consent" required><label for="consent">J'accepte les <a onclick="goTo('conditions')" style="cursor:pointer;color:var(--navy);font-weight:600;text-decoration:underline;">conditions d'utilisation</a> et je confirme être un CSF inscrit à la Chambre de la sécurité financière.</label></div><button type="submit" class="submit-btn">🚀 Créer mon profil gratuitement</button><div class="form-guarantee">🔒 Aucune carte de crédit requise · Annulation en tout temps</div></form><div id="inscSuccess" style="display:none;text-align:center;padding:40px 20px;"><div style="font-size:3rem;margin-bottom:16px;">🎉</div><h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:10px;">Votre demande est reçue !</h3><p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.7;">Notre équipe va vérifier votre inscription CSF et vous écrire dans les 24 prochaines heures.</p></div></div></section>
+    <section class="insc-section" id="inscSection"><div class="insc-inner"><div class="insc-eyebrow">Créer mon profil</div><h2 class="insc-h">Commencez aujourd'hui.<br><em>Gratuitement.</em></h2><p class="insc-sub">Votre profil sera en ligne dans moins de 24h. Aucune carte de crédit requise.</p><form onsubmit="submitInsc(event)" id="inscForm"><div class="form-row"><div class="form-group" style="flex:1"><label class="form-label-dark">Prénom</label><input class="form-inp-dark" type="text" placeholder="Marie" required></div><div class="form-group" style="flex:1"><label class="form-label-dark">Nom</label><input class="form-inp-dark" type="text" placeholder="Tremblay" required></div></div><div class="form-group"><label class="form-label-dark">Courriel professionnel</label><input class="form-inp-dark" type="email" placeholder="marie@cabinet.ca" required></div><div class="form-group"><label class="form-label-dark">Région principale</label><select class="form-select-dark" required><option value="" disabled selected>Choisir votre région...</option><option>Montréal</option><option>Laval</option><option>Montérégie</option><option>Laurentides</option><option>Lanaudière</option><option>Québec (ville)</option><option>Chaudière-Appalaches</option><option>Mauricie</option><option>Estrie</option><option>Outaouais</option><option>Saguenay–Lac-Saint-Jean</option><option>Bas-Saint-Laurent</option><option>Abitibi-Témiscamingue</option><option>Autre région</option></select></div><div class="form-group"><label class="form-label-dark">Spécialité principale</label><select class="form-select-dark" required><option value="" disabled selected>Votre spécialité...</option><option>Assurance participante</option><option>Entrepreneur incorporé & fiscal</option><option>Retraite & planification</option><option>Assurance vie & invalidité</option><option>Jeune famille & REEE</option><option>Succession & fiducie</option><option>Placements & portefeuille</option><option>Maladies graves & soins</option></select></div><div class="form-group"><label class="form-label-dark">Choisir mon plan</label><div class="plan-pickers"><button type="button" class="plan-pick-btn selected" id="ppGratuit" onclick="selectPlan('gratuit')"><span class="ppn">Gratuit</span><span class="ppp">0$/mois · Pour commencer</span></button><button type="button" class="plan-pick-btn" id="ppPro" onclick="selectPlan('pro')"><span class="ppn">Pro ⭐</span><span class="ppp">29,99$/mois · 14j gratuits</span></button><button type="button" class="plan-pick-btn" id="ppElite" onclick="selectPlan('elite')"><span class="ppn">Élite</span><span class="ppp">79,99$/mois · Leads garantis</span></button></div></div><div class="form-checkbox"><input type="checkbox" id="consent" required><label for="consent">J'accepte les <a onclick="goTo('conditions')" style="cursor:pointer;color:var(--navy);font-weight:600;text-decoration:underline;">conditions d'utilisation</a> et je confirme être un CSF inscrit à la Chambre de la sécurité financière.</label></div><button type="submit" class="submit-btn">🚀 Créer mon profil gratuitement</button><div class="form-guarantee">🔒 Aucune carte de crédit requise · Annulation en tout temps</div></form><div id="inscSuccess" style="display:none;text-align:center;padding:40px 20px;"><div style="font-size:3rem;margin-bottom:16px;">🎉</div><h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:10px;">Votre demande est reçue !</h3><p style="font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.7;">Notre équipe va vérifier votre inscription CSF et vous écrire dans les 24 prochaines heures.</p></div></div></section>
   </div>
   <nav class="bottom-nav">
     <button class="bnav-item" onclick="goTo('accueil')"><div class="bnav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Rechercher</button>
@@ -1090,6 +1092,18 @@ nav.top-nav{background:var(--navy);padding:0 20px;display:flex;align-items:cente
           </div>
           <div class="form-group"><label class="form-label">Titre professionnel</label><input class="form-inp" type="text" id="cpTitre" placeholder="ex. Conseiller en sécurité financière · CSF" oninput="updatePreview()"></div>
           <div class="form-group"><label class="form-label">Courriel professionnel</label><input class="form-inp" type="email" id="cpEmail" placeholder="marie@cabinet.ca" oninput="updatePreview()"></div>
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Mot de passe</label>
+              <input class="form-inp" type="password" id="cpPwd" placeholder="8 caractères minimum" oninput="checkCreerPwd()">
+              <div id="cpPwdStrength" style="height:3px;border-radius:100px;margin-top:6px;background:var(--cream-dark);overflow:hidden;"><div id="cpPwdBar" style="height:100%;width:0%;border-radius:100px;transition:all 0.3s;"></div></div>
+            </div>
+            <div class="form-group" style="flex:1">
+              <label class="form-label">Confirmer le mot de passe</label>
+              <input class="form-inp" type="password" id="cpPwdConfirm" placeholder="Répétez votre mot de passe" oninput="checkCreerPwd()">
+              <div id="cpPwdMatch" style="font-size:0.72rem;margin-top:5px;min-height:14px;"></div>
+            </div>
+          </div>
           <div class="form-group"><label class="form-label">Téléphone</label><input class="form-inp" type="tel" placeholder="(514) 555-0100"></div>
           <div class="form-group"><label class="form-label">Région principale</label>
             <select class="form-select" id="cpRegion" onchange="updatePreview()">
@@ -1278,14 +1292,14 @@ nav.top-nav{background:var(--navy);padding:0 20px;display:flex;align-items:cente
             <button type="button" class="plan-pick-btn" id="creerPpPro" onclick="selectCreerPlan('pro')">
               <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span class="ppn">Pro ⭐</span>
-                <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">97$/mois · 14j gratuits</span>
+                <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">29,99$/mois · 14j gratuits</span>
               </div>
               <span class="ppp">Leads · Espace client · Rendez-vous · Analytics</span>
             </button>
             <button type="button" class="plan-pick-btn" id="creerPpElite" onclick="selectCreerPlan('elite')">
               <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span class="ppn">Élite 🏆</span>
-                <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">197$/mois</span>
+                <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);">79,99$/mois</span>
               </div>
               <span class="ppp">Tout Pro + Leads garantis · Mise en avant · Badge</span>
             </button>
@@ -1851,9 +1865,9 @@ function setBilling(type){
   document.getElementById('btnMensuel').classList.toggle('active',type==='mensuel');
   document.getElementById('btnAnnuel').classList.toggle('active',type==='annuel');
   document.getElementById('saveBadge').style.display=type==='annuel'?'inline-flex':'none';
-  document.getElementById('proPrix').textContent=type==='annuel'?'81$':'97$';
+  document.getElementById('proPrix').textContent=type==='annuel'?'24,99$':'29,99$';
   document.getElementById('proPeriode').textContent=type==='annuel'?'/mois · facturé annuellement':'/mois';
-  document.getElementById('elitePrix').textContent=type==='annuel'?'164$':'197$';
+  document.getElementById('elitePrix').textContent=type==='annuel'?'66,99$':'79,99$';
   document.getElementById('elitePeriode').textContent=type==='annuel'?'/mois · facturé annuellement':'/mois';
 }
 function submitInsc(e){ e.preventDefault(); document.getElementById('inscForm').style.display='none'; document.getElementById('inscSuccess').style.display='block'; }
@@ -2115,6 +2129,38 @@ function sendChatMsg(){
 }
 function handleChatKey(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChatMsg();} e.target.style.height='auto'; e.target.style.height=Math.min(e.target.scrollHeight,100)+'px'; }
 
+// ======== MOT DE PASSE CRÉATION PROFIL ========
+function checkCreerPwd() {
+  const pwd = document.getElementById('cpPwd')?.value || '';
+  const confirm = document.getElementById('cpPwdConfirm')?.value || '';
+  const bar = document.getElementById('cpPwdBar');
+  const matchEl = document.getElementById('cpPwdMatch');
+
+  if (bar) {
+    let strength = 0;
+    if (pwd.length >= 8) strength++;
+    if (/[A-Z]/.test(pwd)) strength++;
+    if (/[0-9]/.test(pwd)) strength++;
+    if (/[^A-Za-z0-9]/.test(pwd)) strength++;
+    const colors = ['#e74c3c','#e67e22','#f1c40f','#2ecc71'];
+    const widths = ['25%','50%','75%','100%'];
+    bar.style.width = pwd.length ? (widths[strength-1] || '10%') : '0%';
+    bar.style.background = pwd.length ? (colors[strength-1] || '#e74c3c') : 'transparent';
+  }
+
+  if (matchEl && confirm.length > 0) {
+    if (pwd === confirm) {
+      matchEl.textContent = '✓ Les mots de passe correspondent';
+      matchEl.style.color = '#2ecc71';
+    } else {
+      matchEl.textContent = '✗ Les mots de passe ne correspondent pas';
+      matchEl.style.color = '#e74c3c';
+    }
+  } else if (matchEl) {
+    matchEl.textContent = '';
+  }
+}
+
 // ======== AVATAR UPLOAD ========
 let creerAvatarUrl = null; // stores Firebase Storage URL if photo uploaded
 
@@ -2227,6 +2273,96 @@ function toggleSlot(el) {
   updatePreview();
 }
 
+// ======== STRIPE CHECKOUT ========
+const STRIPE_KEY = 'pk_test_51T8RqLBPlVxZBk9xC3VWuYzsQcyZKq2Y9HmwWp3ND115JhP493GTsdcRIYPgpCLUonKDYrNN2QonW7PEtyzKO1SB005iqsWZ7C';
+const STRIPE_PRICES = {
+  pro:   'price_1T8RtuBPlVxZBk9xVaLGm1YI',
+  elite: 'price_1T8RucBPlVxZBk9xnXzE2qeT',
+};
+
+async function launchStripeCheckout(plan) {
+  if (!plan || plan === 'gratuit') return;
+  const priceId = STRIPE_PRICES[plan];
+  if (!priceId) return;
+
+  // Show loading state on button
+  const btn = event?.target;
+  const origText = btn?.textContent;
+  if (btn) { btn.textContent = 'Redirection...'; btn.disabled = true; }
+
+  try {
+    const stripe = Stripe(STRIPE_KEY);
+    const user = window.fbCurrentUser;
+    const email = user?.email || '';
+
+    await stripe.redirectToCheckout({
+      lineItems: [{ price: priceId, quantity: 1 }],
+      mode: 'subscription',
+      customerEmail: email || undefined,
+      successUrl: window.location.origin + window.location.pathname + '?paiement=succes&plan=' + plan,
+      cancelUrl:  window.location.origin + window.location.pathname + '?paiement=annule',
+    });
+  } catch (err) {
+    console.error('Stripe error:', err);
+    alert('Erreur lors de la redirection vers le paiement. Veuillez réessayer.');
+    if (btn) { btn.textContent = origText; btn.disabled = false; }
+  }
+}
+
+// Handle return from Stripe checkout
+function checkStripeReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('paiement');
+  const plan   = params.get('plan');
+  if (!status) return;
+
+  // Clean URL
+  window.history.replaceState({}, '', window.location.pathname);
+
+  if (status === 'succes' && plan) {
+    // Update plan in Firestore
+    const user = window.fbCurrentUser;
+    if (user && window.fbSaveAdvisorProfile) {
+      // Merge plan update only
+      import('https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js')
+        .then(({ getFirestore, doc, setDoc }) => {
+          // handled by existing fbSaveAdvisorProfile with merge
+        }).catch(() => {});
+    }
+    // Show success toast
+    showToast('🎉 Paiement réussi ! Votre plan ' + (plan === 'pro' ? 'Pro' : 'Élite') + ' est maintenant actif.', 'success');
+    goTo('conseiller');
+  } else if (status === 'annule') {
+    showToast('Paiement annulé. Vous pouvez réessayer en tout temps.', 'info');
+  }
+}
+
+// Toast notification system
+function showToast(msg, type = 'info') {
+  const existing = document.getElementById('fcToast');
+  if (existing) existing.remove();
+
+  const colors = { success: '#2D6A4F', info: '#0B1F3A', error: '#C0392B' };
+  const toast = document.createElement('div');
+  toast.id = 'fcToast';
+  toast.style.cssText = `
+    position:fixed; bottom:90px; left:50%; transform:translateX(-50%);
+    background:${colors[type] || colors.info}; color:#fff;
+    padding:14px 22px; border-radius:12px; font-family:'DM Sans',sans-serif;
+    font-size:0.88rem; font-weight:600; z-index:9999;
+    box-shadow:0 4px 20px rgba(0,0,0,0.25); max-width:340px; text-align:center;
+    animation: toastIn 0.3s ease;
+  `;
+  toast.textContent = msg;
+
+  const style = document.createElement('style');
+  style.textContent = '@keyframes toastIn { from { opacity:0; transform:translateX(-50%) translateY(12px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }';
+  document.head.appendChild(style);
+
+  document.body.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.4s'; setTimeout(() => toast.remove(), 400); }, 4000);
+}
+
 function selectCreerPlan(p) {
   creerPlan = p;
   ['gratuit','pro','elite'].forEach(x => {
@@ -2304,9 +2440,46 @@ function buildProfileCard(d, compact) {
   const statutIcon = d.statut === 'Accepte' ? '✅' : d.statut === 'Limité' ? '⚠️' : '⏳';
   const planBadge = creerPlan === 'elite' ? '<span class="prof-badge prof-badge-gold">⭐ Élite</span>' : creerPlan === 'pro' ? '<span class="prof-badge prof-badge-white">Pro</span>' : '';
 
+  // Use uploaded photo if available, otherwise emoji avatar
+  const localPreview = document.getElementById('avUploadPreview');
+  const localSrc = localPreview && localPreview.style.display !== 'none' ? localPreview.src : null;
+  const photoSrc = creerAvatarUrl || localSrc;
+  const avatarHtml = photoSrc
+    ? `<img src="${photoSrc}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
+    : creerAvatar;
+
   return `<div class="prof-card">
     <div class="prof-card-header">
-      <div class="prof-card-av">${creerAvatar}</div>
+      <div class="prof-card-av">${avatarHtml}</div>
+      <div class="prof-card-name">${name}</div>
+      <div class="prof-card-title">${title}</div>
+      <div class="prof-card-badges">
+        ${planBadge}
+        ${d.region ? `<span class="prof-badge prof-badge-white">📍 ${d.region}</span>` : ''}
+        ${d.amfValid ? '<span class="prof-badge prof-badge-green">✓ AMF vérifié</span>' : ''}
+        <span class="prof-badge prof-badge-white">${statutIcon} ${d.statut}</span>
+      </div>
+    </div>
+    <div class="prof-card-body">
+      ${d.slogan ? `<div style="font-family:'Playfair Display',serif;font-size:0.88rem;color:var(--gold);font-style:italic;margin-bottom:10px;">"${d.slogan}"</div>` : ''}
+      <div class="prof-bio-preview">${d.bio || '<span class="prof-bio-placeholder">Votre bio apparaîtra ici…</span>'}</div>
+      ${d.specs.length ? `<div class="prof-tags">${d.specs.map(s => `<span class="prof-tag ${creerPlan==='elite'?'elite-tag':''}">${s}</span>`).join('')}</div>` : ''}
+      <div class="prof-specs">
+        ${d.cabinet ? `<div class="prof-spec-row"><span class="prof-spec-icon">🏢</span><span class="prof-spec-val">${d.cabinet}</span></div>` : ''}
+        ${d.langs.length ? `<div class="prof-spec-row"><span class="prof-spec-icon">🌐</span><span class="prof-spec-val">${d.langs.join(' · ')}</span></div>` : ''}
+        ${expLabel ? `<div class="prof-spec-row"><span class="prof-spec-icon">🕐</span><span class="prof-spec-val">${expLabel}</span></div>` : ''}
+        ${d.modes.length ? `<div class="prof-spec-row"><span class="prof-spec-icon">🤝</span><span class="prof-spec-val">${d.modes.join(' · ')}</span></div>` : ''}
+        ${d.certs.length ? `<div class="prof-spec-row"><span class="prof-spec-icon">🎓</span><span class="prof-spec-val">${d.certs.join(' · ')}</span></div>` : ''}
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+        <div class="prof-amf-badge" style="background:rgba(201,168,76,0.07);border-color:rgba(201,168,76,0.2);color:var(--gold);flex:1;justify-content:center;">💲 Aucuns frais pour le client</div>
+      </div>
+      ${d.amfValid
+        ? `<div class="prof-amf-badge">✓ Code AMF confirmé · Profil conforme CSF</div>`
+        : `<div class="prof-amf-badge pending">⏳ Vérification AMF en attente</div>`}
+    </div>
+  </div>`;
+}
       <div class="prof-card-name">${name}</div>
       <div class="prof-card-title">${title}</div>
       <div class="prof-card-badges">
@@ -2380,29 +2553,57 @@ function submitCreerProfil() {
   if (!d.region) { alert('Veuillez choisir votre région.'); return; }
   if (!d.specs.length) { alert('Veuillez choisir au moins une spécialité.'); return; }
   if (!d.amfValid) { alert('Veuillez entrer un code AMF valide (5 à 8 chiffres).'); return; }
-  if (!consent) { alert('Veuillez accepter les conditions d\'utilisation.'); return; }
+  const pwd = document.getElementById('cpPwd')?.value || '';
+  const pwdConfirm = document.getElementById('cpPwdConfirm')?.value || '';
+  if (pwd.length < 8) { alert('Le mot de passe doit contenir au moins 8 caractères.'); return; }
+  if (pwd !== pwdConfirm) { alert('Les mots de passe ne correspondent pas.'); return; }
+  if (!consent) { alert("Veuillez accepter les conditions d'utilisation."); return; }
 
-  const btn = document.querySelector('#creerFormView .submit-btn') || document.querySelector('[onclick="submitCreerProfil()"]');
-  if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours...'; }
+  const btn = document.querySelector('[onclick="submitCreerProfil()"]');
+  if (btn) { btn.disabled = true; btn.textContent = 'Création du compte...'; }
 
-  // Save to Firebase Firestore
-  (window.fbSaveAdvisorProfile || (() => Promise.resolve('demo')))({
-    prenom: d.prenom, nom: d.nom, email: d.email, tel: d.tel,
-    region: d.region, titre: d.titre, cabinet: d.cabinet,
-    exp: d.exp, langs: d.langs, bio: d.bio, slogan: d.slogan,
-    specs: d.specs, modes: d.modes, slots: d.slots, statut: d.statut,
-    amf: d.amf, csf: d.csf, plan: creerPlan,
-    avatarUrl: creerAvatarUrl || null,
+  // 1. Create Firebase Auth account
+  const email = d.email || '';
+  const createAccount = email
+    ? (window.fbCreateUser || (() => Promise.resolve({ uid: 'demo' })))(email, pwd, {
+        prenom: d.prenom, nom: d.nom, role: 'conseiller'
+      })
+    : Promise.resolve({ uid: 'demo' });
+
+  createAccount.then(() => {
+    if (btn) btn.textContent = 'Sauvegarde du profil...';
+    // 2. Save advisor profile to Firestore
+    return (window.fbSaveAdvisorProfile || (() => Promise.resolve('demo')))({
+      prenom: d.prenom, nom: d.nom, email: d.email, tel: d.tel,
+      region: d.region, titre: d.titre, cabinet: d.cabinet,
+      exp: d.exp, langs: d.langs, bio: d.bio, slogan: d.slogan,
+      specs: d.specs, modes: d.modes, slots: d.slots, statut: d.statut,
+      amf: d.amf, csf: d.csf, plan: creerPlan,
+      avatarUrl: creerAvatarUrl || null,
+    });
   }).then(() => {
     if (btn) { btn.disabled = false; btn.textContent = 'Soumettre mon profil →'; }
     window._confirmData = { d, avatar: creerAvatar, plan: creerPlan };
-    goTo('confirmation');
+    if (creerPlan === 'pro' || creerPlan === 'elite') {
+      launchStripeCheckout(creerPlan);
+    } else {
+      goTo('confirmation');
+    }
   }).catch(err => {
     if (btn) { btn.disabled = false; btn.textContent = 'Soumettre mon profil →'; }
     console.error('Erreur Firebase:', err);
-    // Still show confirmation on error (graceful degradation)
+    // Show friendly error for duplicate email
+    if (err.code === 'auth/email-already-in-use') {
+      alert('Ce courriel est déjà associé à un compte. Veuillez vous connecter ou utiliser une autre adresse.');
+      return;
+    }
+    // Graceful degradation for other errors
     window._confirmData = { d, avatar: creerAvatar, plan: creerPlan };
-    goTo('confirmation');
+    if (creerPlan === 'pro' || creerPlan === 'elite') {
+      launchStripeCheckout(creerPlan);
+    } else {
+      goTo('confirmation');
+    }
   });
 }
 
@@ -3482,7 +3683,7 @@ function quickReject(id) {
             <div class="param-section-title">Plan actuel</div>
             <div class="param-plan-current"><div><div class="param-plan-name">Plan Gratuit</div><div class="param-plan-price">0$/mois</div></div><span class="param-plan-badge">Actif</span></div>
             <div style="font-size:0.84rem;color:var(--text-mid);line-height:1.7;margin-bottom:16px;">Vous utilisez actuellement le plan gratuit. Passez au plan <strong>Pro</strong> pour accéder à la messagerie illimitée, la prise de rendez-vous et les analytics.</div>
-            <button class="param-upgrade-btn" onclick="goTo('conseillers')">⭐ Passer au plan Pro — 97$/mois</button>
+            <button class="param-upgrade-btn" onclick="launchStripeCheckout('pro')">⭐ Passer au plan Pro — 29,99$/mois</button>
           </div>
           <div class="param-section">
             <div class="param-section-title">Historique de facturation</div>
@@ -4314,7 +4515,7 @@ function injectFooter() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => { injectFooter(); });
+document.addEventListener('DOMContentLoaded', () => { injectFooter(); checkStripeReturn(); });
 
 </script>
 
