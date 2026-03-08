@@ -2480,35 +2480,6 @@ function buildProfileCard(d, compact) {
     </div>
   </div>`;
 }
-      <div class="prof-card-name">${name}</div>
-      <div class="prof-card-title">${title}</div>
-      <div class="prof-card-badges">
-        ${planBadge}
-        ${d.region ? `<span class="prof-badge prof-badge-white">📍 ${d.region}</span>` : ''}
-        ${d.amfValid ? '<span class="prof-badge prof-badge-green">✓ AMF vérifié</span>' : ''}
-        <span class="prof-badge prof-badge-white">${statutIcon} ${d.statut}</span>
-      </div>
-    </div>
-    <div class="prof-card-body">
-      ${d.slogan ? `<div style="font-family:'Playfair Display',serif;font-size:0.88rem;color:var(--gold);font-style:italic;margin-bottom:10px;">"${d.slogan}"</div>` : ''}
-      <div class="prof-bio-preview">${d.bio || '<span class="prof-bio-placeholder">Votre bio apparaîtra ici…</span>'}</div>
-      ${d.specs.length ? `<div class="prof-tags">${d.specs.map(s => `<span class="prof-tag ${creerPlan==='elite'?'elite-tag':''}">${s}</span>`).join('')}</div>` : ''}
-      <div class="prof-specs">
-        ${d.cabinet ? `<div class="prof-spec-row"><span class="prof-spec-icon">🏢</span><span class="prof-spec-val">${d.cabinet}</span></div>` : ''}
-        ${d.langs.length ? `<div class="prof-spec-row"><span class="prof-spec-icon">🌐</span><span class="prof-spec-val">${d.langs.join(' · ')}</span></div>` : ''}
-        ${expLabel ? `<div class="prof-spec-row"><span class="prof-spec-icon">🕐</span><span class="prof-spec-val">${expLabel}</span></div>` : ''}
-        ${d.modes.length ? `<div class="prof-spec-row"><span class="prof-spec-icon">🤝</span><span class="prof-spec-val">${d.modes.join(' · ')}</span></div>` : ''}
-        ${d.certs.length ? `<div class="prof-spec-row"><span class="prof-spec-icon">🎓</span><span class="prof-spec-val">${d.certs.join(' · ')}</span></div>` : ''}
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
-        <div class="prof-amf-badge" style="background:rgba(201,168,76,0.07);border-color:rgba(201,168,76,0.2);color:var(--gold);flex:1;justify-content:center;">💲 Aucuns frais pour le client</div>
-      </div>
-      ${d.amfValid
-        ? `<div class="prof-amf-badge">✓ Code AMF confirmé · Profil conforme CSF</div>`
-        : `<div class="prof-amf-badge pending">⏳ Vérification AMF en attente</div>`}
-    </div>
-  </div>`;
-}
 
 function updatePreview() {
   const d = getCreerData();
@@ -3141,7 +3112,7 @@ function adminAction(action) {
   if (idx === -1) return;
   const item = list.splice(idx, 1)[0];
   if (action === 'accept') {
-    item.date = 'À l'instant';
+    item.date = "À l\u2019instant";
     adminData.active.unshift(item);
     alert('✅ Profil de ' + item.name + ' accepté ! Un courriel de confirmation a été envoyé.');
   } else {
